@@ -2,7 +2,7 @@
 
 namespace WexaGraph.Api.Services
 {
-    public class CognoDbService
+    public class CognoDbService: ICognoDbService
     {
         private readonly IDriver _driver;
 

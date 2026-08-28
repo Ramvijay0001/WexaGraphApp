@@ -8,11 +8,10 @@ namespace WexaGraph.Api.Controllers
     [ApiController]
     public class DatabaseController : ControllerBase
     {
-        private readonly CognoDbService _cognoDbService;
+        private readonly ICognoDbService _cognoDbService;
         private readonly SeedService _seedService;
 
-
-        public DatabaseController(CognoDbService cognoDbService, SeedService seedService)
+        public DatabaseController(ICognoDbService cognoDbService,SeedService seedService)
         {
             _cognoDbService = cognoDbService;
             _seedService = seedService;

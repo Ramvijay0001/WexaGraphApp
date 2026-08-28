@@ -27,7 +27,7 @@ builder.Services.AddSingleton<IDriver>(_ =>
         uri,
         AuthTokens.Basic(username, password)));
 
-builder.Services.AddSingleton<CognoDbService>();
+builder.Services.AddSingleton<ICognoDbService,CognoDbService>();
 builder.Services.AddSingleton<SeedService>();
 
 builder.Services.AddEndpointsApiExplorer();
