@@ -1,0 +1,184 @@
+<div class="container">
+
+  <header class="header">
+    <h1>Wexa Graph Explorer</h1>
+    <p>Explore technologies, projects and domains through a graph.</p>
+  </header>
+
+  <section class="search-section">
+
+    <label for="technology">
+      Technology
+    </label>
+
+    <div class="search-box">
+
+      <input
+        id="technology"
+        type="text"
+        placeholder="Enter technology e.g. Angular"
+        [(ngModel)]="technology"
+        (keyup.enter)="search()"
+      />
+
+      <button
+        type="button"
+        (click)="search()"
+        [disabled]="loading"
+      >
+        {{ loading ? 'Searching...' : 'Explore' }}
+      </button>
+
+    </div>
+
+  </section>
+@if (loading) {
+
+  <div class="loading">
+
+    <div class="spinner"></div>
+
+    <span>
+      Exploring graph...
+    </span>
+
+  </div>
+
+}
+  @if (errorMessage) {
+  <div class="error-message">
+
+    <strong>Something went wrong</strong>
+
+    <p>
+      {{ errorMessage }}
+    </p>
+
+  </div>
+  }
+
+  @if (searched) {
+
+    <section class="results">
+
+      <h2>
+        Results for "{{ technology }}"
+      </h2>
+
+      <div class="cards">
+
+        <div class="card">
+          <h3>Projects</h3>
+
+          @if (projects.length > 0) {
+            <ul>
+              @for (project of projects; track project) {
+                <li>{{ project }}</li>
+              }
+            </ul>
+          } @else {
+            <p>No projects found.</p>
+          }
+        </div>
+
+        <div class="card">
+          <h3>Domains</h3>
+
+          @if (domains.length > 0) {
+            <ul>
+              @for (domain of domains; track domain) {
+                <li>
+                  <strong>{{ domain.projectName }}</strong>
+                  <span> → {{ domain.domainName }}</span>
+                </li>
+              }
+            </ul>
+          } @else {
+            <p>No domains found.</p>
+          }
+        </div>
+
+        <div class="card">
+          <h3>Related Technologies</h3>
+
+          @if (recommendations.length > 0) {
+            <ul>
+              @for (item of recommendations; track item.technologyName) {
+                <li>
+                  <strong>{{ item.technologyName }}</strong>
+                  <span> — {{ item.category }}</span>
+                </li>
+              }
+            </ul>
+          } @else {
+            <p>No recommendations found.</p>
+          }
+        </div>
+
+      </div>
+
+    </section>
+@if (graphData.length > 0) {
+
+  <section class="graph-section">
+
+    <h2>Graph Visualization</h2>
+
+    <p>
+      Relationship between technology, projects and domains.
+    </p>
+
+    <app-graph-view
+      [graphData]="graphData"
+      (nodeSelected)="onNodeSelected($event)">
+    </app-graph-view>
+
+  </section>
+
+}
+  <div class="graph-legend">
+
+  <div class="legend-item">
+    <span class="legend-dot technology"></span>
+    Technology
+  </div>
+
+  <div class="legend-item">
+    <span class="legend-dot related"></span>
+    Related Technology
+  </div>
+
+  <div class="legend-item">
+    <span class="legend-dot project"></span>
+    Project
+  </div>
+
+  <div class="legend-item">
+    <span class="legend-dot domain"></span>
+    Domain
+  </div>
+
+</div>
+@if (selectedNode) {
+
+  <div class="node-details">
+
+    <h3>Selected Node</h3>
+
+    <div class="detail-row">
+      <strong>Name:</strong>
+      <span>{{ selectedNode.label }}</span>
+    </div>
+
+    <div class="detail-row">
+      <strong>Type:</strong>
+      <span>{{ selectedNode.type }}</span>
+    </div>
+
+  </div>
+
+}
+  }
+
+
+</div>

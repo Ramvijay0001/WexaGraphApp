@@ -1,0 +1,11 @@
+.vs/
+**/bin/
+**/obj/
+**/node_modules/
+**/.angular/cache/
+**/dist/
+.env
+.env.*
+appsettings.Development.json
+
+**/.git-backup-angular/

@@ -1,0 +1,43 @@
+.graph-container {
+  width: 100%;
+  height: 550px;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  overflow: hidden;
+}
+
+.graph-header {
+  height: 55px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 20px;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.graph-header h3 {
+  margin: 0;
+
+  font-size: 18px;
+}
+
+.graph-header span {
+  font-size: 13px;
+
+  color: #64748b;
+}
+
+.graph {
+  width: 100%;
+  height: calc(100% - 55px);
+}
